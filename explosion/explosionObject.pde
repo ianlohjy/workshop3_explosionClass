@@ -49,24 +49,20 @@ void start(){
        for(int k = 0 ; k < particles.size()-1; k++){
          ExplosionParticle particle2 = (ExplosionParticle) particles.get(k);
      
-         if ( dist(particle.location.x,particle.location.y,particle2.location.x,particle2.location.y) < 5){
-           
-           PVector ps = new PVector(0,0);
-           
-           
+         //if ( dist(particle.location.x,particle.location.y,particle2.location.x,particle2.location.y) < 10){
            
            particle.speed.x =  particle.location.x - particle2.location.x;
            particle.speed.y =  particle.location.y - particle2.location.y;
-         }
+         //}
      
       
       
       
      
      }
-     //particle.speed.normalize();
+     particle.speed.normalize();
      
-     particle.speed.mult(0.0001);
+     particle.speed.mult(random (1,2));
      particle.move();
      particle.draw();
      
