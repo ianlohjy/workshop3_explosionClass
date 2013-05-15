@@ -40,14 +40,41 @@ void build(){
        ExplosionParticle particle = (ExplosionParticle) particles.get(i);
        particle.draw();
      }
+   }
+
+void start(){
+     for (int i = 0 ; i < particles.size()-1; i++){
+     ExplosionParticle particle = (ExplosionParticle) particles.get(i);
      
+       for(int k = 0 ; k < particles.size()-1; k++){
+         ExplosionParticle particle2 = (ExplosionParticle) particles.get(k);
      
-     //random(radius) * cos(random(0,360));
-     //random(radius) * sin(random(0,360));
+         if ( dist(particle.location.x,particle.location.y,particle2.location.x,particle2.location.y) < 5){
+           
+           PVector ps = new PVector(0,0);
+           
+           
+           
+           particle.speed.x =  particle.location.x - particle2.location.x;
+           particle.speed.y =  particle.location.y - particle2.location.y;
+         }
      
+      
+      
+      
      
-   //}
+     }
+     //particle.speed.normalize();
      
- }
+     particle.speed.mult(0.0001);
+     particle.move();
+     particle.draw();
+     
+     particle.speed.x = 0;
+     particle.speed.y = 0;
+   }
+  
+  
+}
  
 }
