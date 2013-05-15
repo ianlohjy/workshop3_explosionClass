@@ -9,8 +9,9 @@ class Explosion{
  float radius;
  float energy;
  float tension;
+ float energyinit;
  
- Explosion(float x,float y,int d,float r,float e,float t){
+ Explosion(float x,float y,int d,float r,float e){
    
    particles = new ArrayList();
    xpos=x;
@@ -18,11 +19,7 @@ class Explosion{
    density=d;
    radius=r;
    energy=e;
-   tension=t;
-   
-   //num[] = new int[density]; 
-   //vel[] = new int[density]; 
-   //pos[] = new int[density]; 
+   energyinit = energy;
    
    strokeWeight(1);
    
@@ -62,31 +59,35 @@ void start(){
          
          if ( dist < 100 && linelim <= 1 ){
            
-           stroke(204, 102, 0, 50);
-           strokeWeight(10);
+           stroke(204, 102, 0, abs(map(energy,0,energyinit,0,255))*0.3);
+           strokeWeight(abs(map(energy,0,energyinit,0,40)));
            line(particle.location.x,particle.location.y, particle2.location.x,particle2.location.y);
            strokeWeight(1);
            stroke(1);
            linelim++;
            
          }
-     
-      
-      
-      
-     
+
      }
      particle.speed.normalize();
      randomSeed(i);
-     particle.speed.mult(random (1));
+     particle.speed.mult(random (1)* energy/4);
      particle.move();
      particle.draw();
      
      particle.speed.x = 0;
      particle.speed.y = 0;
    }
-  
+   
+   energy -- ;
+   
+   if (energy <= -energyinit-1){
+    energy = energyinit;
+ 
+   }
   
 }
+  
+
  
 }
