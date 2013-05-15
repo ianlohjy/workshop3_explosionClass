@@ -7,7 +7,7 @@ void setup(){
 size (1200,1200);
 background (204);
 
-explosion = new Explosion(140,100,1000,20,0,0);
+explosion = new Explosion(140,100,200,20,0,0);
 explosion.build(); 
   
 }

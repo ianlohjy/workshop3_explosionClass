@@ -18,7 +18,7 @@ location.add(speed);
 }
 
 void draw(){
-ellipse(location.x,location.y,r,r); 
+//ellipse(location.x,location.y,r,r); 
 }
     
 }
