@@ -4,15 +4,17 @@ PVector location = new PVector(0,0);
 PVector speed = new PVector(0,0);
 float r;  
 
-ExplosionParticle(float x,float y,float speed, float radius){
+ExplosionParticle(float x,float y,float sx, float sy, float radius){
 location.x = x;
-location.x = y;
+location.y = y;
 r = radius;
+speed.x = sx;
+speed.y = sy;
 }
 
 
 void move(){
-location += speed;  
+location.add(speed);  
 }
 
 void draw(){

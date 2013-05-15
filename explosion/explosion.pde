@@ -1,10 +1,13 @@
 Explosion explosion;
 
+
+
 void setup(){
 
 size (200,200);
 
-explosion = new Explosion();
+explosion = new Explosion(140,100,1000,20,0,0);
+explosion.build(); 
   
 }
 
@@ -12,5 +15,7 @@ explosion = new Explosion();
 void draw(){
  
   line(0,0,200,200);
-  explosion.build();
+  
+  //println("built2!");
+  
 }
