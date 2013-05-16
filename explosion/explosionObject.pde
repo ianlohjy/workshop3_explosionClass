@@ -11,6 +11,9 @@ class Explosion{
  float tension;
  float energyinit;
  
+ boolean allow;
+ boolean build;
+ 
  Explosion(float x,float y,int d,float r,float e){
    
    particles = new ArrayList();
@@ -21,27 +24,36 @@ class Explosion{
    energy=e;
    energyinit = energy;
    
-   strokeWeight(1);
-   
-      for (int i = 0 ; i < density; i++){
+   build = true;
+   allow = false; 
+ }
+void build(){
+  
+    if (build == true){
+  
+     for (int i = 0 ; i < density; i++){
      float ix = random(radius) * cos(radians(random(0,360)));
      float iy = random(radius) * sin(radians(random(0,360)));
      
      particles.add(new ExplosionParticle(ix+xpos,iy+ypos,0,0,15));
-     
-     
-   }
-   
- }
-void build(){
+     }
+  
    //for (int i; i<density+1 ; i++){
      for (int i = 0 ; i < particles.size()-1; i++){
        ExplosionParticle particle = (ExplosionParticle) particles.get(i);
        particle.draw();
+       
+       build = false;
+       allow = true;
+       
      }
-   }
+ }
+}
 
 void start(){
+  
+    if (allow == true){   
+  
      for (int i = 0 ; i < particles.size()-1; i++){
      ExplosionParticle particle = (ExplosionParticle) particles.get(i);
      int linelim = 0;
@@ -71,7 +83,7 @@ void start(){
      }
      particle.speed.normalize();
      randomSeed(i);
-     particle.speed.mult(random (1)* energy/4);
+     particle.speed.mult(random (1)* energy/2);
      particle.move();
      particle.draw();
      
@@ -81,10 +93,37 @@ void start(){
    
    energy -- ;
    
-   if (energy <= -energyinit-1){
-    energy = energyinit;
- 
+   if (energy == 0){
+    allow = false; 
+
    }
+  }
+  
+}
+
+void reset(float x, float y){
+  
+       for (int i = 0 ; i < particles.size()-1; i++){
+         
+       xpos = x;
+       ypos = y;
+         
+       float ix = random(radius) * cos(radians(random(0,360)));
+       float iy = random(radius) * sin(radians(random(0,360)));  
+         
+       ExplosionParticle particle = (ExplosionParticle) particles.get(i);
+       particle.location.x = ix+xpos;
+       particle.location.y = iy+ypos;
+       particle.draw();
+       
+       energy = energyinit;
+       
+       }
+       
+       build = false;
+       allow = true;
+
+  
   
 }
   
